@@ -1,8 +1,11 @@
-import Board from "./Board";
+import Game from "./Game";
+
 
 export default function Square() {
   return (
-    
-    <Board  />
+    <div>
+       <Game />
+    </div>
+  
   )
 }

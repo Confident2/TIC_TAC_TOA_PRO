@@ -1,23 +1,20 @@
-import { useState } from "react";
+;
 import { Square } from "./Square";
-import { calculateWinner } from "./components/CalculateWinner";
+import { calculateWinner } from "./partials/CalculateWinner";
 
-export default function Board() {
-  const [xIsNext, setXIsNext] = useState(true);
-  const [squares, setSquares] = useState(Array(9).fill(null));
+export function Board({xIsNext, squares, onPlay}) {
 
   function handleClick(value) {
-    if (squares[value] || calculateWinner(squares)) {
+    if (calculateWinner(squares) || squares[value] ) {
       return;
     }
-    const nextSquares = squares.slice();
+    const nextSquares = squares.slice(); // a copy of the origin array
     if (xIsNext) {
       nextSquares[value] = "X";
     } else {
       nextSquares[value] = "O";
     }
-    setSquares(nextSquares); // Update the squares
-    setXIsNext(!xIsNext); // Change the player
+    onPlay(nextSquares);
   }
 
   const winner = calculateWinner(squares);
